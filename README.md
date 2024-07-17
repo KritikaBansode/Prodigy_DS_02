@@ -17,5 +17,10 @@ Dataset in this project is Titanic 🚢
 ![image](https://github.com/user-attachments/assets/87c04e77-350f-4f65-9e36-5123a2d36729)
 ![image](https://github.com/user-attachments/assets/9c89569e-3986-4f5d-9825-24a97861fea8)
 
+# Acknowledgments
+
+Kaggle for providing the Titanic dataset.
+The data science community for their continuous support and resources.
+
 
 
