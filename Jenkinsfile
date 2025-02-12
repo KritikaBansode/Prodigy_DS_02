@@ -1,9 +1,9 @@
 pipeline {
-    agent any  
+    agent any  // Runs on any available Jenkins agent
 
     tools {
-        maven 'MAVEN'  // Make sure 'MAVEN' is the exact name from Jenkins Global Tool Configuration
-        jdk 'JDK'      // Make sure 'JDK' is the exact name from Jenkins Global Tool Configuration
+        maven 'MAVEN'  // Ensure 'MAVEN' is the exact name configured in Jenkins
+        jdk 'JDK'      // Ensure 'JDK' is the exact name configured in Jenkins
     }
 
     stages {
@@ -24,10 +24,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'chmod +x mvnw'  // Ensures the script has execute permission on Linux
-                        sh './mvnw -B -DskipTests clean package'  // Runs Maven build on Linux
+                        sh 'mvn -B -DskipTests clean package'  // Runs Maven build on Linux/macOS
                     } else {
-                        bat 'mvnw -B -DskipTests clean package'  // Runs Maven build on Windows
+                        bat 'mvn -B -DskipTests clean package'  // Runs Maven build on Windows
                     }
                 }
             }
@@ -38,7 +37,7 @@ pipeline {
         always {
             junit(
                 allowEmptyResults: true,
-                testResults: '*/test-reports/*.xml'
+                testResults: '**/target/surefire-reports/*.xml'  // Ensure test reports are correctly located
             )
         }
     }
