@@ -2,8 +2,8 @@ pipeline {
     agent any  // Runs on any available Jenkins agent
 
     tools {
-        maven "MAVEN" // Uses Maven installed in Jenkins
-        jdk "JDK"     // Uses Java JDK installed in Jenkins
+        maven 'MAVEN'  // Ensure 'MAVEN' is exactly as configured in Jenkins
+        jdk 'JDK'      // Ensure 'JDK' matches Jenkins configuration
     }
 
     stages {
@@ -12,6 +12,12 @@ pipeline {
                 echo "Setting up environment variables"
                 echo "PATH = ${M2_HOME}/bin:${PATH}"
                 echo "M2_HOME = /opt/maven"
+            }
+        }
+
+        stage('Check Java Version') {  // Added Java check stage
+            steps {
+                sh 'java -version'  // Ensures Java is correctly installed
             }
         }
 
