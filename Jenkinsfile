@@ -1,30 +1,34 @@
 pipeline {
-    agent any  // Runs on any available Jenkins agent
+    agent any  
 
     tools {
-        maven 'MAVEN'  // Ensure 'MAVEN' is exactly as configured in Jenkins
-        jdk 'JDK'      // Ensure 'JDK' matches Jenkins configuration
+        maven 'MAVEN'  // Make sure 'MAVEN' is the exact name from Jenkins Global Tool Configuration
+        jdk 'JDK'      // Make sure 'JDK' is the exact name from Jenkins Global Tool Configuration
     }
 
     stages {
         stage('Initialize') {
             steps {
                 echo "Setting up environment variables"
-                echo "PATH = ${M2_HOME}/bin:${PATH}"
-                echo "M2_HOME = /opt/maven"
+                echo "Maven Home: ${tool 'MAVEN'}"
             }
         }
 
-        stage('Check Java Version') {  // Added Java check stage
+        stage('Check Java Version') {  
             steps {
-                sh 'java -version'  // Ensures Java is correctly installed
+                sh 'java -version'  // Verify Java installation
             }
         }
 
         stage('Build') {
             steps {
-                dir("/var/lib/jenkins/workspace/Java-Maven-Pipeline/my-app") {  
-                    sh 'mvn -B -DskipTests clean package'  
+                script {
+                    if (isUnix()) {
+                        sh 'chmod +x mvnw'  // Ensures the script has execute permission on Linux
+                        sh './mvnw -B -DskipTests clean package'  // Runs Maven build on Linux
+                    } else {
+                        bat 'mvnw -B -DskipTests clean package'  // Runs Maven build on Windows
+                    }
                 }
             }
         }
