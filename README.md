@@ -6,7 +6,7 @@ Welcome! This Project is done under Prodigy InfoTech. It involves comprehensive 
 
 # Dataset
 
-Dataset in this project is Titanic 🚢 
+🚢 Dataset in this project is Titanic 🚢 
 
 ![image](https://github.com/user-attachments/assets/099a51a6-a5f0-4c73-94d0-5a9a2184a191)
 ![image](https://github.com/user-attachments/assets/a3fa17e7-b3d8-453f-a530-34edfbe0a1b1)
